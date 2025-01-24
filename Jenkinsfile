@@ -22,7 +22,7 @@ pipeline {
         stage('test') {
             steps {
                 sh '''
-                    grep -f /var/jenkins_home/workspace/fromhit/build/indes.html
+                    grep -f /var/jenkins_home/workspace/fromhit/build/index.html
                     npm test
                 '''
             }
