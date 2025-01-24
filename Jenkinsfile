@@ -20,11 +20,12 @@ pipeline {
             }
         }
         stage('test') {
-            sh '''
-                grep -f /var/jenkins_home/workspace/fromhit/build/indes.html
-                npm test
-            '''
-
+            steps {
+                sh '''
+                    grep -f /var/jenkins_home/workspace/fromhit/build/indes.html
+                    npm test
+                '''
+            }
         }
     }
 }
