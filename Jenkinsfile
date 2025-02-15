@@ -91,10 +91,11 @@ pipeline {
                     node_modules/.bin/netlify deploy --dir=build --json > deploy-output.json
                     node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json
                 '''
+                script{
+                    env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout:true)
             }
-            script{
-                env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout:true)
             }
+            
         }
         stage('stage E2E') {
             agent {
@@ -105,7 +106,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = '${env.STAGING_URL}'
+                CI_ENVIRONMENT_URL = "${env.STAGING_URL}"
             }
 
             steps {
