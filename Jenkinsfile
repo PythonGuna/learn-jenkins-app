@@ -92,6 +92,11 @@ pipeline {
                 '''
             }
         }
+        stage('Approval'){
+            timeout(1) {
+                 input 'do you want implement?'
+            }     
+        }
 
         stage('Deploy prod') {
             agent {
