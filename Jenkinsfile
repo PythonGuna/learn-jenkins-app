@@ -95,7 +95,7 @@ pipeline {
         stage('Approval'){
             steps{
                 timeout(1) {
-                    input 'do you want implement?'
+                    input message: 'do you want to continue?', ok: 'yes sure'
                  }  
             }
                
