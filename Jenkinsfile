@@ -17,7 +17,7 @@ pipeline {
                 }
             }
             environment{
-                AWS_S3_BUCKET = "jenkin-app-sample"
+                AWS_S3_BUCKET = 'jenkin-app-sample'
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'myaws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
