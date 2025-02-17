@@ -16,14 +16,17 @@ pipeline {
                     args "--entrypoint=''"
                 }
             }
-                steps {
-                    withCredentials([usernamePassword(credentialsId: 'myaws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-                        sh '''
-                            aws --version
-                            echo "hello from the other side" > index.html
-                            aws s3 cp index.html s3://jenkin-app-sample/index.html
-                        '''
-                    }
+            environment{
+                AWS_S3_BUCKET = "jenkin-app-sample"
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'myaws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    sh '''
+                        aws --version
+                        echo "hello from the other side" > index.html
+                        aws s3 cp index.html s3://$AWS_S3_BUCKET/index.html
+                    '''
+                }
                 }
             }
 
